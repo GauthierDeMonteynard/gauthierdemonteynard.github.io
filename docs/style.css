@@ -1,0 +1,103 @@
+/* RESET MOBILE */
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg,#ff9a9e,#fad0c4);
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    min-height:100vh;
+}
+
+/* CARTE */
+.container {
+    width:95%;
+    max-width:420px;
+    background:white;
+    margin-top:10px;
+    padding:12px 12px 14px 12px; /* ↓ padding réduit */
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* TEXTE */
+.subtitle {
+    margin:0 0 6px 0;      /* ↓ espace réduit */
+    font-size:15px;        /* ↓ police réduite */
+    line-height:1.2;
+    color:#555;
+}
+
+/* IMAGE (inchangée comme demandé) */
+.board {
+    width:100%;
+    border-radius:12px;
+    margin:6px 0 8px 0; /* ↓ marges réduites */
+}
+
+/* CONTROLES */
+.controls {
+    display:flex;
+    flex-direction:column;
+    gap:6px; /* ↓ gap réduit */
+}
+
+select, input, button {
+    padding:9px;        /* ↓ hauteur réduite */
+    font-size:15px;
+    border-radius:9px;
+    border:1px solid #ddd;
+}
+
+button {
+    background:#ff4d6d;
+    color:white;
+    border:none;
+    font-weight:bold;
+}
+
+/* CHRONO */
+.timer {
+    margin-top:8px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+/* CADEAU */
+.gift {
+    margin-top:8px;
+    padding:10px;
+    background:#fff0f3;
+    border-radius:10px;
+    font-size:16px;
+    line-height:1.2;
+    transition:0.5s;
+}
+/* 💚 Coeurs animés victoire */
+.hearts {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    font-size: 22px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh) scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110vh) scale(1.4);
+        opacity: 0;
+    }
+}

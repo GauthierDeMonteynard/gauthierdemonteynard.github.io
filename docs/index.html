@@ -1,24 +1,182 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>My GitHub Pages Site</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Valentine</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background-color: #1a1a1a;
+        }
+
+        .background {
+            background-image: url('us.jpg');
+            background-size: cover; /* Remplit tout l'écran */
+            background-repeat: no-repeat; /* Empêche absolument la duplication */
+            background-position: center 20%; /* Centre l'image horizontalement, et l'ajuste un peu vers le haut verticalement */
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10vh 0; /* Ajoute de l'espace en haut et en bas pour que ce ne soit pas collé aux bords */
+            box-sizing: border-box; /* Assure que le padding n'ajoute pas de scrollbar */
+            background-color: rgba(0, 0, 0, 0.5);
+            background-blend-mode: darken;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #ff4d6d;
+            font-size: 3.5rem;
+            text-shadow: 0 0 20px rgba(255, 77, 109, 0.6);
+            margin: 0; /* On enlève la marge du bas puisqu'on gère l'espace avec flexbox */
+            text-align: center;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 40px;
+            position: relative;
+            min-width: 400px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 20px 40px;
+            font-size: 1.8rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        #yes-btn {
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: white;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        #yes-btn:hover {
+            transform: scale(1.1);
+        }
+
+        #no-btn {
+            background-color: #f0f0f0;
+            color: #555;
+            font-size: 1.2rem;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.1); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+            60% { transform: scale(1); }
+        }
+
+        /* Styles pour les coeurs qui tombent */
+        .heart-particle {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            z-index: 0;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Welcome to my GitHub Pages site</h1>
-    <p>A minimal HTML/CSS/JS starter</p>
-  </header>
 
-  <main>
-    <section id="app">
-      <button id="btn">Click me</button>
-      <p id="msg"></p>
-    </section>
-  </main>
+<div id="heart-container"></div> <!-- Le conteneur pour les coeurs -->
 
-  <script src="script.js" defer></script>
+<div class="background">
+    <h1>Will you be my Valentine?</h1>
+    <div class="buttons-container" id="container">
+        <button id="yes-btn" class="btn">
+            <span>❤️</span>
+            YES
+        </button>
+        <button id="no-btn" class="btn">
+            <span>💔</span>
+            NO
+        </button>
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById('no-btn');
+    const container = document.getElementById('container');
+    const heartContainer = document.getElementById('heart-container');
+    let swapped = false;
+
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.className = 'heart-particle';
+        heart.innerHTML = '❤️';
+        
+        // Propriétés aléatoires
+        const startLeft = Math.random() * 100;
+        const duration = Math.random() * 3 + 2;
+        const size = Math.random() * 20 + 15;
+        
+        heart.style.left = startLeft + 'vw';
+        heart.style.animationDuration = duration + 's';
+        heart.style.fontSize = size + 'px';
+        
+        heartContainer.appendChild(heart);
+
+        // On retire le coeur après son animation
+        setTimeout(() => {
+            heart.remove();
+        }, duration * 1000);
+    }
+
+    // Lancement immédiat et régulier
+    setInterval(createHeart, 300);
+
+    function swapButtons(e) {
+        if (e) e.preventDefault();
+        
+        if (!swapped) {
+            container.style.flexDirection = 'row-reverse';
+        } else {
+            container.style.flexDirection = 'row';
+        }
+        swapped = !swapped;
+    }
+
+    noBtn.addEventListener('mouseover', swapButtons);
+    noBtn.addEventListener('click', swapButtons);
+    noBtn.addEventListener('touchstart', (e) => {
+        swapButtons(e);
+    });
+
+    document.getElementById('yes-btn').addEventListener('click', () => {
+
+        window.location.href = 'question.html';
+    });
+</script>
+
 </body>
 </html>

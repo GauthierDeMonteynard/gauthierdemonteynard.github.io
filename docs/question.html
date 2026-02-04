@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission St Valentin ♟️❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <p class="subtitle">TRAIT AUX NOIRS</p>
+    <p class="subtitle"> Attention, ton cadeau downgrade au fil du temps</p>
+
+    <img src="pos.png" class="board">
+
+    <div class="controls">
+        <select id="piece">
+            <option value="">Choisir une pièce</option>
+            <option>Roi</option>
+            <option>Dame</option>
+            <option>Tour</option>
+            <option>Fou</option>
+            <option>Cavalier</option>
+            <option>Pion</option>
+        </select>
+
+        <input id="square" placeholder="Case cible (ex: f7)">
+        <button onclick="playMove()">Jouer</button>
+    </div>
+
+    <div class="timer">
+        ⏱️ Temps écoulé : <span id="time">0</span>s
+    </div>
+
+    <div id="gift" class="gift">
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
