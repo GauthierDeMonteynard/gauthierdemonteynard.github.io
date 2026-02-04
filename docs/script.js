@@ -1,9 +1,4 @@
 // ================= CONFIG =================
-// Affiche le cadeau actuel au chargement de la page
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("gift").innerText =
-        "🎁 Cadeau en jeu : " + gifts[giftIndex];
-});
 
 // 👉 Solution du problème d'échecs
 const solutionPiece = "Cavalier";
@@ -21,27 +16,64 @@ const gifts = [
     "💋 Un gros bisou"
 ];
 
-
+// ================= PERSISTANCE =================
+const STORAGE_KEY = "st_valentin_game";
 let giftIndex = 0;
+let startTime = Date.now();
 let seconds = 0;
 
-// ================= CHRONO =================
+// Sauvegarde l'état dans localStorage
+function saveGame() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        startTime: startTime,
+        giftIndex: giftIndex
+    }));
+}
 
+// Charge l'état depuis localStorage
+document.addEventListener("DOMContentLoaded", () => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if (saved) {
+        const data = JSON.parse(saved);
+        startTime = data.startTime;
+        giftIndex = data.giftIndex;
+    } else {
+        saveGame();
+    }
+
+    // Temps écoulé
+    seconds = Math.floor((Date.now() - startTime) / 1000);
+
+    document.getElementById("time").innerText = seconds;
+    document.getElementById("gift").innerText =
+        "🎁 Cadeau en jeu : " + gifts[giftIndex];
+});
+
+// ================= CHRONO =================
 setInterval(() => {
-    seconds++;
+    seconds = Math.floor((Date.now() - startTime) / 1000);
     document.getElementById("time").innerText = seconds;
 
-    // Toutes les 30 secondes → le cadeau régresse
-    if (seconds % 30 === 0) {
-        downgradeGift();
+    // calcule combien de downgrades devraient déjà avoir eu lieu
+    const expectedIndex = Math.min(
+        Math.floor(seconds / 30),
+        gifts.length - 1
+    );
+
+    if (expectedIndex > giftIndex) {
+        giftIndex = expectedIndex;
+        saveGame();
+        document.getElementById("gift").innerText =
+            "🎁 Cadeau en jeu : " + gifts[giftIndex];
     }
 }, 1000);
 
 // ================= CADEAU =================
-
 function downgradeGift() {
     if (giftIndex < gifts.length - 1) {
         giftIndex++;
+        saveGame();
     }
 
     document.getElementById("gift").innerText =
@@ -49,7 +81,6 @@ function downgradeGift() {
 }
 
 // ================= GAMEPLAY =================
-
 function playMove() {
     const piece = document.getElementById("piece").value;
     const square = document.getElementById("square").value.toLowerCase().trim();
