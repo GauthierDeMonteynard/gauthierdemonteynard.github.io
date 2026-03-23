@@ -1,2 +1,2 @@
 # gauthierdemonteynard.github.io
-Website for Soso
+Website for personal projects
