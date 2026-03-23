@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jedi Math Academy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Jedi Academy</h1>
+</header>
+
+<main id="game-container">
+    <section id="intro-screen">
+        <p>Bienvenue, jeune Padawan.<br>Es-tu prête à utiliser la Force ?</p>
+        <button class="btn-jedi main-start" onclick="game.start()">Commencer la Mission</button>
+    </section>
+
+    <section id="game-board" class="hidden">
+        <div id="question">?</div>
+
+        <div class="input-container">
+            <div id="display-answer"></div>
+            <div class="laser-underline"></div>
+        </div>
+
+        <div class="numpad">
+            <button onclick="game.addDigit(1)">1</button>
+            <button onclick="game.addDigit(2)">2</button>
+            <button onclick="game.addDigit(3)">3</button>
+            <button onclick="game.addDigit(4)">4</button>
+            <button onclick="game.addDigit(5)">5</button>
+            <button onclick="game.addDigit(6)">6</button>
+            <button onclick="game.addDigit(7)">7</button>
+            <button onclick="game.addDigit(8)">8</button>
+            <button onclick="game.addDigit(9)">9</button>
+            <button onclick="game.clearDigit()" class="btn-clear">C</button>
+            <button onclick="game.addDigit(0)">0</button>
+            <button onclick="game.checkAnswer()" class="btn-validate">OK</button>
+        </div>
+
+        <div class="stats">
+            <p>Force : <span id="score-val">0</span></p>
+        </div>
+        <button class="btn-exit" onclick="game.showMenu()">Quitter</button>
+    </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
