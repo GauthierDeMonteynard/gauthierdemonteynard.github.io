@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soso — Redirection</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      margin: 0;
+      background: #fafaf5;
+      color: #1a1a1a;
+    }
+    .card {
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 { color: #2e7d32; font-size: 2rem; margin-bottom: 0.5rem; }
+    .subtitle { color: #666; }
+    p { color: #666; margin-top: 1.5rem; }
+    .notice {
+      font-size: 0.85rem;
+      color: #999;
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #e8f5e9;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🌸 soso</h1>
+    <p class="subtitle">Joue, gagne, tourne la roue !</p>
+    <p>Tu vas être redirigé·e vers l'application...</p>
+    <div class="notice">
+      ⚠️ Remplace <code>URL_DU_TUNNEL</code> dans le script ci-dessous<br>
+      par l'URL du Cloudflare Tunnel une fois actif.
+    </div>
+  </div>
+  <script>
+    var liveUrl = 'URL_DU_TUNNEL_CLOUDFLARE'
+    if (liveUrl !== 'URL_DU_TUNNEL_CLOUDFLARE') {
+      window.location.replace(liveUrl + '/soso/')
+    }
+  </script>
+</body>
+</html>
